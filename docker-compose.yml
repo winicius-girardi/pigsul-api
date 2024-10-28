@@ -1,0 +1,18 @@
+services:
+  db:
+    container_name: db_postgresql
+    image: postgres:16.4-alpine3.20
+    restart: always
+    shm_size: 128mb
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: admin
+      POSTGRES_DB: teste
+    volumes:
+      - ./banco.sql:/docker-entrypoint-initdb.d/banco.sql
+      - ./popula.sql:/docker-entrypoint-initdb.d/popula.sql
+    
+#cli -> psql -U <user> -H <db_name>
+#abrir cli -> docker exec -it <container-name> sh

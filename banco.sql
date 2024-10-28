@@ -111,7 +111,6 @@ CREATE TABLE IF NOT EXISTS app_schema.carga_racao(
 
 CREATE TABLE IF NOT EXISTS app_schema.consumo_racao(
     id_consumo_racao INT GENERATED ALWAYS AS IDENTITY,
-    id_lote INT,
     id_carga_racao INT,
     data_consumo_inicio DATE NOT NULL,
     inicio_inteiro BOOLEAN NOT NULL,-- TRUE > CARGA FOI CONSUMIDA O DIA INTEIRO; FALSE > MEIO DIA DE CONSUMO APENAS
@@ -119,7 +118,6 @@ CREATE TABLE IF NOT EXISTS app_schema.consumo_racao(
     termino_inteiro BOOLEAN NULL, -- TRUE > CARGA FOI CONSUMIDA ATÉ O FINAL DO DIA ; FALSE > CONSUMO FOI ATÉ METADE DO DIA
     qtd_animais_vivos INTEGER NULL,
 
-    CONSTRAINT id_lote_fk FOREIGN KEY (id_lote) REFERENCES lote(id_lote),
     CONSTRAINT qtd_animais_vivos_check CHECK (qtd_animais_vivos >0),
     CONSTRAINT id_carga_racao_fk FOREIGN KEY (id_carga_racao) REFERENCES carga_racao(id_carga_racao),
     CONSTRAINT id_consumo_racao_pk PRIMARY KEY (id_consumo_racao)
